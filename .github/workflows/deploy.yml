@@ -25,7 +25,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # enablement: true — крок сам вмикає Pages, якщо його ще не налаштовано.
+      # Без цього він падає з помилкою на репозиторії, де Source ще не переведено
+      # на GitHub Actions, і разом із ним падає весь деплой.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
