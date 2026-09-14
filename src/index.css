@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-bg: 247 249 252;
+  --c-surface: 255 255 255;
+  --c-elevated: 241 245 250;
+  --c-line: 221 229 239;
+  --c-line2: 235 241 248;
+  --c-fg: 15 26 43;
+  --c-muted: 90 107 133;
+  --c-faint: 138 153 175;
+  --c-accent: 37 99 235;
+  --c-ok: 13 148 96;
+  --c-warn: 180 113 8;
+  --c-danger: 205 43 49;
+  --c-violet: 124 92 226;
+  --c-cyan: 8 145 178;
+  --c-amber: 180 113 8;
+  color-scheme: light;
+}
+
+.dark {
+  --c-bg: 11 15 23;
+  --c-surface: 17 24 35;
+  --c-elevated: 22 31 45;
+  --c-line: 35 48 68;
+  --c-line2: 28 38 54;
+  --c-fg: 230 237 247;
+  --c-muted: 143 161 187;
+  --c-faint: 108 126 152;
+  --c-accent: 79 140 255;
+  --c-ok: 53 201 138;
+  --c-warn: 245 165 36;
+  --c-danger: 242 85 90;
+  --c-violet: 167 139 250;
+  --c-cyan: 34 211 238;
+  --c-amber: 251 191 36;
+  color-scheme: dark;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  @apply bg-bg text-fg font-sans antialiased;
+  margin: 0;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+::selection { background: rgb(var(--c-accent) / 0.28); }
+
+/* ---------- scrollbars ---------- */
+.scroll-thin { scrollbar-width: thin; scrollbar-color: rgb(var(--c-line)) transparent; }
+.scroll-thin::-webkit-scrollbar { width: 9px; height: 9px; }
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-line));
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.scroll-thin::-webkit-scrollbar-track { background: transparent; }
+
+@layer components {
+  .panel {
+    @apply bg-surface border border-line rounded-xl;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-line bg-elevated px-2 py-0.5 text-[11px] font-medium text-muted;
+  }
+  .kbd {
+    @apply inline-flex h-5 min-w-[20px] items-center justify-center rounded border border-line bg-elevated px-1.5 font-mono text-[10px] text-muted;
+  }
+  .link {
+    @apply text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent transition;
+  }
+  .prose-lab {
+    @apply text-[15px] leading-7 text-fg/90;
+  }
+  .prose-lab p { @apply mb-3; }
+  .prose-lab strong { @apply font-semibold text-fg; }
+  .prose-lab code {
+    @apply font-mono text-[12.5px] rounded bg-elevated border border-line px-1 py-0.5 text-fg;
+  }
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg;
+  }
+}
+
+/* flow edge animation */
+.flow-edge { stroke-dasharray: 6 6; }
+.flow-edge.is-live { animation: dashmove 0.9s linear infinite; }
+@keyframes dashmove { to { stroke-dashoffset: -24; } }

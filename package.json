@@ -1,0 +1,36 @@
+{
+  "name": "1c-internals-lab",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Interactive lab explaining how 1C/BAS turns documents into register records, balances and reports",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --force",
+    "verify": "esbuild scripts/verify.ts --bundle --platform=node --format=cjs --alias:@=./src --outfile=node_modules/.verify.cjs --log-level=warning && node node_modules/.verify.cjs",
+    "smoke": "esbuild scripts/smoke.tsx --bundle --platform=node --format=cjs --alias:@=./src --external:jsdom --loader:.css=empty --jsx=automatic --outfile=node_modules/.smoke.cjs --log-level=warning && node node_modules/.smoke.cjs",
+    "check": "npm run typecheck && npm run verify && npm run smoke && npm run build"
+  },
+  "dependencies": {
+    "framer-motion": "^11.18.2",
+    "lucide-react": "^0.469.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.1",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "esbuild": "^0.25.12",
+    "jsdom": "^30.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.6.3",
+    "vite": "^6.0.7"
+  }
+}
