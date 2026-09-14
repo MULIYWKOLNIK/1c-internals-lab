@@ -30,9 +30,26 @@ npm run dev          # http://localhost:5180
 | `npm run smoke` | Димовий тест UI у jsdom: усі 21 маршрут, кнопки, анімації, localStorage |
 | `npm run check` | Усе разом: typecheck → verify → smoke → build |
 
-Production build кладеться в `dist/` і є статикою. `base: './'` у `vite.config.ts` плюс `HashRouter`
-означають, що зібрану папку можна відкрити з будь-якого підкаталогу або навіть з `file://` без
-налаштування сервера.
+Production build кладеться в `dist/` і є статикою.
+
+## Деплой: GitHub Pages
+
+Сайт публікується автоматично — воркфлоу [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+збирає проєкт при кожному push у `main` і віддає `dist/` у Pages.
+
+Адреса: **https://muliywkolnik.github.io/1c-internals-lab/**
+
+Два налаштування, від яких це залежить:
+
+- `base: '/1c-internals-lab/'` у [`vite.config.ts`](vite.config.ts) — без нього шляхи до JS і CSS
+  вказували б на корінь домену, і сторінка відкривалася б білою. Якщо репозиторій колись
+  перейменують, це значення треба змінити разом із ним.
+- `HashRouter` у [`src/App.tsx`](src/App.tsx) — усі 21 маршрут живуть за `#/...` в одному
+  `index.html`, тому прямі посилання на внутрішні сторінки не дають 404 і жодних rewrite-правил
+  не потрібно.
+
+Разова ручна дія на GitHub: **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+На безкоштовному плані репозиторій має бути публічним (сам сайт у будь-якому разі публічний).
 
 ---
 
